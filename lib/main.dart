@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:english_words/english_words.dart';
 
+import 'A.dart';
+
 void main() {
   runApp(MyApp());
 
@@ -33,6 +35,9 @@ void main() {
   demoDefaultParamsFunc();
   demoDefaultParamsFunc(age: 18);
   demoDefaultParamsFunc(name: 'FC');
+
+  MyA myA = MyA();
+  myA.publicAdd(1, 2);
 }
 
 void demoNormalFunc(int age, String name) {
