@@ -29,15 +29,12 @@ void main() {
 
   demoOptionalPositionParamsFunc(18, 'FC');
   demoOptionalPositionParamsFunc(18, 'FC', 'badminton');
+
+  demoDefaultParamsFunc();
+  demoDefaultParamsFunc(age: 18);
+  demoDefaultParamsFunc(name: 'FC');
 }
 
-void test2(int age, [String name]) {
-
-}
-
-void test(int age, [String name]) {
-
-}
 void demoNormalFunc(int age, String name) {
   print('normal, age: $age, name: $name');
 }
@@ -51,7 +48,7 @@ void demoRequiredParamsFunc({@required int age, @required String name}) {
 }
 
 void demoDefaultParamsFunc({int age = 20, String name = 'Forever'}) {
-
+  print('default, age: $age, name: $name');
 }
 
 void demoOptionalPositionParamsFunc(int age, String name, [String interests]) {
