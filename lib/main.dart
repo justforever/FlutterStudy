@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:english_words/english_words.dart';
 
 import 'A.dart';
+import 'Car.dart';
+import 'SportCar.dart';
 
 void main() {
   runApp(MyApp());
@@ -14,33 +16,106 @@ void main() {
   // demoDynamic();
   // demoTripleOperator();
 
-  demoNormalFunc(18, 'FC');
-  // demoNormalFunc(18);
-  // demoNormalFunc('FC', 18);
+  demoPositionalParamFunc(18, 'FC'); //normal, age: 18, name: FC
+  // demoPositionalParamFunc(18);
+  // demoPositionalParamFunc('FC', 18);
 
-
-  demoOptionalParamsFunc();
-  demoOptionalParamsFunc(age: 18);
-  demoOptionalParamsFunc(name: 'FC');
-  demoOptionalParamsFunc(age: 18, name: 'FC');
+  demoOptionalParamsFunc(); //optional, age: null, name: null
+  demoOptionalParamsFunc(age: 18); //optional, age: 18, name: null
+  demoOptionalParamsFunc(name: 'FC'); //optional, age: null, name: FC
+  demoOptionalParamsFunc(age: 18, name: 'FC'); //optional, age: 18, name: FC
 
   demoRequiredParamsFunc();
   demoRequiredParamsFunc(name: 'FC');
   demoRequiredParamsFunc(age: 18);
   demoRequiredParamsFunc(age: 18, name: 'FC');
 
-  demoOptionalPositionParamsFunc(18, 'FC');
-  demoOptionalPositionParamsFunc(18, 'FC', 'badminton');
+  demoOptionalPositionParamsFunc(18, 'FC'); //FC has no interests
+  demoOptionalPositionParamsFunc(18, 'FC', 'badminton'); //FC loves badminton
 
   demoDefaultParamsFunc();
   demoDefaultParamsFunc(age: 18);
   demoDefaultParamsFunc(name: 'FC');
 
-  MyA myA = MyA();
-  myA.publicAdd(1, 2);
+  // MyA myA = MyA();
+  // myA.publicAdd(1, 2);
+
+  // demoFuture();
+  // demoFutureDelayed();
+
+  // demoCallbackHell();
+  // demoAsyncAwait();
+  demoNormalFeature();
+
+  SportCar myBenzzz = SportCar();
+  print('brand: ${myBenzzz.brand}'); //Benzzzz
+  myBenzzz.makeSomeNoise(); //YEEEEEEEEE
+  myBenzzz.honk(); //BALABALABA
 }
 
-void demoNormalFunc(int age, String name) {
+Future<List> futureWait() {
+  //do your logic
+  return Future.value([2, 3, 4]);
+}
+
+demoFuture() {
+  Future<List> future = futureWait();
+  future.then((value) => print(value))
+      .catchError((onError) => print(onError))
+      .whenComplete(() => print('when complete'));
+}
+
+Future<String> futureDelayed(){
+  return Future.delayed(Duration(seconds: 2),
+          () => 'Delay 2 second');
+}
+
+demoFutureDelayed() {
+  futureDelayed().then((value) => print(value));
+}
+
+Future<String> step1() {
+  // return Future.value("Step 1");
+  return Future.delayed(Duration(seconds: 3), ()=>"Step 1");
+}
+
+Future<String> step2(String target2) {
+  // return Future.value("Step 2");
+  return Future.delayed(Duration(seconds: 2), ()=>"Step 2");
+}
+
+Future<String> step3(String target3) {
+  // return Future.value("Step 3");
+  return Future.delayed(Duration(seconds: 1), ()=>"Step 3");
+}
+
+demoCallbackHell() {
+  print("demoCallbackHell");
+  step1().then((step1Result) {
+    print("done step 1, $step1Result");
+    step2(step1Result).then((step2Result) {
+      print("done step 2, $step2Result");
+      step3(step2Result).then((step3Result) {
+        print("done step 3, $step3Result");
+        //...other steps
+      });
+    });
+  });
+}
+
+demoAsyncAwait() async{
+  await step1().then((value) => print(value));
+  await step2("step 2").then((value) => print(value));
+  await step3("step 3").then((value) => print(value));
+}
+
+demoNormalFeature() {
+  step1().then((value) => print(value));
+  step2("step 2").then((value) => print(value));
+  step3("step 3").then((value) => print(value));
+}
+
+void demoPositionalParamFunc(int age, String name) {
   print('normal, age: $age, name: $name');
 }
 
