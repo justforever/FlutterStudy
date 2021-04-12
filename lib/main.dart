@@ -9,6 +9,7 @@ import 'Cat.dart';
 import 'Dog.dart';
 import 'DogHotel.dart';
 import 'PetHotel.dart';
+import 'PublicAndPrivate.dart';
 import 'SportCar.dart';
 import 'PetHotelT.dart';
 
@@ -46,6 +47,7 @@ void main() {
 
   // MyA myA = MyA();
   // myA.publicAdd(1, 2);
+  // myA.
 
   // demoFuture();
   // demoFutureDelayed();
@@ -63,6 +65,12 @@ void main() {
   print(MyA.staticConst); //Static Const
   print(MyA.staticFinal); //2021-04-12 12:11:36.890729
   print(MyA.staticFunc(1, 2)); //3
+}
+
+demoPublicAndPrivateFunc() {
+  PublicAndPrivate publicAndPrivate = PublicAndPrivate();
+  publicAndPrivate.publicAdd(1, 2); //3
+  // publicAndPrivate.
 }
 
 demoWithoutParentClass() {
@@ -300,7 +308,7 @@ demoDataTypeNumber() {
   b = 10; //10
 
   int c = 10; //10
-  c = 30.2; //A value of type 'double' can't be assigned to a variable of type 'int'
+  // c = 30.2; //A value of type 'double' can't be assigned to a variable of type 'int'
 
   double d = 10; //10.0
   d = 30.2; //30.2
