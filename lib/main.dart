@@ -1,14 +1,21 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:english_words/english_words.dart';
+import 'package:hello_world/CatHotel.dart';
 
 import 'A.dart';
 import 'Car.dart';
+import 'Cat.dart';
+import 'Dog.dart';
+import 'DogHotel.dart';
+import 'PetHotel.dart';
 import 'SportCar.dart';
+import 'PetHotelT.dart';
 
 void main() {
   runApp(MyApp());
 
+  demoDataTypeNumber();
   // demoDataTypeString();
   // demoStringOperator();
   // demoListAndArray();
@@ -33,9 +40,9 @@ void main() {
   demoOptionalPositionParamsFunc(18, 'FC'); //FC has no interests
   demoOptionalPositionParamsFunc(18, 'FC', 'badminton'); //FC loves badminton
 
-  demoDefaultParamsFunc();
-  demoDefaultParamsFunc(age: 18);
-  demoDefaultParamsFunc(name: 'FC');
+  demoDefaultParamsFunc(); //default, age: 20, name: Forever
+  demoDefaultParamsFunc(age: 18); //default, age: 18, name: Forever
+  demoDefaultParamsFunc(name: 'FC'); //default, age: 20, name: FC
 
   // MyA myA = MyA();
   // myA.publicAdd(1, 2);
@@ -51,6 +58,39 @@ void main() {
   print('brand: ${myBenzzz.brand}'); //Benzzzz
   myBenzzz.makeSomeNoise(); //YEEEEEEEEE
   myBenzzz.honk(); //BALABALABA
+
+  print(MyA.staticVar); //3
+  print(MyA.staticConst); //Static Const
+  print(MyA.staticFinal); //2021-04-12 12:11:36.890729
+  print(MyA.staticFunc(1, 2)); //3
+}
+
+demoWithoutParentClass() {
+  Cat cat = Cat();
+  CatHotel catHotel = CatHotel();
+  catHotel.feeding(cat);
+  catHotel.bathing(cat);
+
+  Dog dog = Dog();
+  DogHotel dogHotel = DogHotel();
+  dogHotel.feeding(dog);
+  dogHotel.bathing(dog);
+}
+
+demoCommonParentClass() {
+  Cat cat = Cat();
+  Dog dog = Dog();
+  PetHotel catHotel = PetHotel();
+  catHotel.feeding(cat);
+  catHotel.bathing(dog);
+}
+
+demoT() {
+  Cat cat = Cat();
+  Dog dog = Dog();
+  PetHotelT<Cat> catHotel = PetHotelT();
+  catHotel.feeding(cat);
+  // catHotel.bathing(dog);
 }
 
 Future<List> futureWait() {
@@ -254,14 +294,16 @@ demoDataTypeString() {
 }
 
 demoDataTypeNumber() {
-  // num a = 10;
-  // a = 30.2;
-  //
-  // int b = 10;
-  // b = 30.2;
-  //
-  // double c = 10;
-  // c = 30.2;
+  num a = 10; //10
+  a = 30.2; //30.2
+  num b = 30.2; //30.2
+  b = 10; //10
+
+  int c = 10; //10
+  c = 30.2; //A value of type 'double' can't be assigned to a variable of type 'int'
+
+  double d = 10; //10.0
+  d = 30.2; //30.2
 }
 
 demoNumberOperator() {
@@ -283,15 +325,10 @@ demoDataType() {
 }
 
 demoConst() {
-  const a = 5;
-  // Uncommenting below statement will cause compile time error.
-  // Because we can't able to assign a runtime value to a const variable
+  // const a = 5;
   // const b = DateTime.now();
-
-  // Without type or var
-  const c = 5;
-  // With a type
-  const int d = 5;
+  // const c; //The constant 'c' must be initialized
+  // const int d = 5;
 }
 
 demoBool() {
@@ -299,10 +336,18 @@ demoBool() {
   const b = false;
 }
 
+demoVar() {
+  var a;
+  var b = 5;
+  var c = 'Hello World';
+  var d = true;
+}
+
 demoFinal() {
-  final a = 5;
-  final b = DateTime.now();
-  final int c = 5;
+  // final a = 5;
+  // final b = DateTime.now();
+  // final c; //The final variable 'c' must be initialized
+  // final int d = 5;
 }
 
 class A {
