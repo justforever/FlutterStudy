@@ -1,7 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:english_words/english_words.dart';
 import 'package:hello_world/CatHotel.dart';
+import 'package:http/http.dart' as http;
 
 import 'A.dart';
 import 'Car.dart';
@@ -65,6 +68,26 @@ void main() {
   print(MyA.staticConst); //Static Const
   print(MyA.staticFinal); //2021-04-12 12:11:36.890729
   print(MyA.staticFunc(1, 2)); //3
+
+  demoHttp();
+}
+
+demoHttp() async{
+  print('demoHttp');
+  var response = await http.post('https://jsonplaceholder.typicode.com/users',
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8'
+      },
+      body: utf8.encode(jsonEncode({
+        'id': 11,
+        'name': 'Justin Lin',
+        'username': 'caterpillar',
+        'email': 'caterpillar@openhome.cc'
+      }))
+  );
+  print('111');
+  var responseBody = response.body;
+  print(responseBody);
 }
 
 demoPublicAndPrivateFunc() {
@@ -240,6 +263,9 @@ demoListAndArray() {
   print(constArray); //[4, 5, 6]
 
   growableList.length = 5; //[1, 1, 1, null, null]
+  print('grawableList.length: ${growableList.length}');
+  growableList.length = 2;
+  print('grawableList.length: ${growableList.length}');
   growableList.add(4); //[1, 1, 1, null, null, 4]
   growableList.remove(1); //[1, 1, null, null, 4]
   growableList.insert(4, 3); //[1, 1, null, null, 3, 4]
